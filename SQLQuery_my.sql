@@ -1,6 +1,15 @@
 use Moja_baza;
 
-SELECT * FROM dbo.Level1
+
+
+SELECT * FROM dbo.Highscores
+
+SELECT dbo.Player.name, dbo.Highscores.Score FROM dbo.Highscores 
+INNER JOIN dbo.Player ON dbo.Player.playerId = dbo.Highscores.PlayerId
+ORDER BY Score DESC
+
+
+SELECT * FROM dbo.Things ORDER BY points DESC
 Go;
 
 SELECT total_time, total_tries, max_score FROM dbo.Player
@@ -9,9 +18,9 @@ GO
 SELECT * FROM dbo.Player
 GO
 
-INSERT INTO dbo.Player
+INSERT INTO dbo.Highscores
 VALUES
-	 ( 2, 'Testowy',0,0,0, 2)
+	 ( 2, 2, 5000)
 GO
 
 DELETE FROM dbo.Player WHERE playerId=2
@@ -20,7 +29,17 @@ UPDATE dbo.Player SET lifes_left = 1 WHERE playerId=1
 
 
 
-/*CREATE TRIGGER all_elements
+/*
+
+CREATE TABLE dbo.Highscores
+(
+   Id			 INT    NOT NULL   PRIMARY KEY, -- primary key column
+   PlayerId      INT  NOT NULL, 
+   Score		 INT NOT NULL 
+);
+GO
+
+CREATE TRIGGER all_elements
 ON dbo.Level1
 AFTER INSERT
 AS
