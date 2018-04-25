@@ -1,10 +1,52 @@
 use Moja_baza;
-/*
-INSERT INTO dbo.Level1
-   ([Id],[PlayerId],[ThingsId])
-VALUES
-	 ( 1, 1, 1)
+
+SELECT * FROM dbo.Level1
+Go;
+
+SELECT total_time, total_tries, max_score FROM dbo.Player
 GO
+
+SELECT * FROM dbo.Player
+GO
+
+INSERT INTO dbo.Player
+VALUES
+	 ( 2, 'Testowy',0,0,0, 2)
+GO
+
+DELETE FROM dbo.Player WHERE playerId=2
+
+UPDATE dbo.Player SET lifes_left = 1 WHERE playerId=1
+
+
+
+/*CREATE TRIGGER all_elements
+ON dbo.Level1
+AFTER INSERT
+AS
+IF (SELECT COUNT(*) FROM dbo.Level1 WITH (NOLOCK)) = 6
+
+BEGIN
+ INSERT INTO dbo.Level1
+   ([Id],[PlayerId],[ThingsId])
+	VALUES
+	 ( 100, 5, 1)
+END
+GO
+
+DROP Trigger all_elements;
+
+
+DELETE FROM dbo.Level1
+WHERE Id>0; 
+
+INSERT INTO dbo.Level1
+VALUES
+	 ( 6, 1, 2)
+GO
+
+
+SELECT COUNT(*) FROM dbo.Level1 WITH (NOLOCK)
 
 SELECT * FROM dbo.Level1,dbo.Things WHERE dbo.Level1.ThingsId = dbo.Things.thingsId;
 GO
@@ -41,20 +83,6 @@ CREATE TABLE dbo.Level1
 );
 GO
 
-/*
-INSERT INTO dbo.Things
-   ([thingsId],[color],[points],[extra_time])
-VALUES
-	 ( 1, N'White', 100, 5),
-	  ( 2, N'Yellow', 200, 10),
-	   ( 3, N'Red', 500, 15),
-	    ( 4, N'Blue', 300, 15),
-		 ( 5, N'Pink', 1000, 30),
-		  ( 6, N'Green', 50, 5)
-GO
-
-
-SELECT * FROM dbo.Things
 
 
 /*
@@ -111,9 +139,10 @@ CREATE TABLE dbo.Player
 );
 GO
 
--- Insert rows into table 'Customers'
 INSERT INTO dbo.Player
    ([playerId],[name],[total_time],[total_tries],[max_score],[lifes_left])
 VALUES
 	 ( 1, N'Test', 0, 0, 0, 3)
 GO
+
+*/
