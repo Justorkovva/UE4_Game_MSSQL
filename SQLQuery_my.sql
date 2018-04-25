@@ -6,7 +6,7 @@ SELECT * FROM dbo.Highscores
 
 SELECT dbo.Player.name, dbo.Highscores.Score FROM dbo.Highscores 
 INNER JOIN dbo.Player ON dbo.Player.playerId = dbo.Highscores.PlayerId
-ORDER BY Score DESC
+ORDER BY Score DESC 
 
 
 SELECT * FROM dbo.Things ORDER BY points DESC
@@ -20,10 +20,12 @@ GO
 
 INSERT INTO dbo.Highscores
 VALUES
-	 ( 2, 2, 5000)
+	 ( 4, 1, 100)
 GO
 
-DELETE FROM dbo.Player WHERE playerId=2
+DELETE FROM dbo.Player WHERE playerId=3
+
+DELETE FROM dbo.Highscores WHERE Id>1
 
 UPDATE dbo.Player SET lifes_left = 1 WHERE playerId=1
 
